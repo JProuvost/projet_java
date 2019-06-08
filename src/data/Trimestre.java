@@ -32,5 +32,10 @@ public class Trimestre extends idClasse {
     public int getidAnnee(){
         return idAnnee;
     }
+
+    void changerdate(String d, String f) {
+        debut = d;
+        fin = f;
+    }
     
 }

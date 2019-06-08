@@ -468,10 +468,28 @@ public class Ecole extends idClasse {
     
     public void addAnnee(int id){
         annee.add(new AnneeScolaire(id));
+        addTrimestre(trimestre.size(), 1, "7 septembre", "20 decembre", id);
+        addTrimestre(trimestre.size(), 2, "6 janvier", "21 mars", id);
+        addTrimestre(trimestre.size(), 3, "7 avril", "25 juin", id);
     }
     
     public void addBulletin(int id, int idIns, int idTri, String appre){
+        
         bulletin.add(new Bulletin(id, idIns, idTri, appre));
+        ArrayList<Enseignement> ens = new ArrayList<>();
+        
+        try{
+            Inscription ins = seekerInscription(idIns);
+            HashMap<String,idClasse> insis = whoamI(ins);
+            Classe c = (Classe)insis.get("Classe");
+            getmine(c,ens, new ArrayList<>());
+        }catch(NotFoundException e){
+            System.out.println("l'Inscritpion n'existe pas");
+        }
+        
+        for(int i = 0; i<ens.size(); i++){
+            addDetail(detail.size(), id, ens.get(i).getid(),"");
+        }       
     }
     
     public void addClasse(int id, String nom, int idNiveau, int idAnnee){
@@ -495,7 +513,22 @@ public class Ecole extends idClasse {
     }
     
     public void addInscription(int id, int idCla, int idPerso){
+        
         inscription.add(new Inscription(id, idCla, idPerso));
+        ArrayList<Trimestre> T = new ArrayList<>();
+                
+        try{
+            Classe c = seekerClasse(idCla);
+            HashMap<String, idClasse> cis = whoamI(c);
+            AnneeScolaire y = (AnneeScolaire)cis.get("AnneeScolaire");
+            getmine(y, T, new ArrayList<Classe>());
+        }catch(NotFoundException e){
+            System.out.println("la Classe n'existe pas");
+        }
+        
+        for(int i=0; i<T.size(); i++){
+            addBulletin(bulletin.size(), id, T.get(i).getid(), "");
+        }
     }
     
     public void addNiveau(int id, String nom){
@@ -620,6 +653,14 @@ public class Ecole extends idClasse {
         throw new NotFoundException();
     }
     
+    public void modifierTrimestre(int idT, String debut, String fin){
+        try{
+            seekerTrimestre(idT).changerdate(debut,fin);
+            }catch(NotFoundException e){
+            System.out.print("Le Trimestre n'existe pas");
+        }
+    }
+    
     public double MoyenneDetail(int id){
     
         double summ = 0;
@@ -638,13 +679,31 @@ public class Ecole extends idClasse {
         return summ/evals.size();
     }
     
-    public double moyenneBulletin(int id){
+    public double MoyenneBulletin(int id){
     
         double summ = 0;
         ArrayList<DetailBulletin> details = new ArrayList<>();
         
         try{
             Bulletin d = seekerBulletin(id);
+            getmine(d,details);
+            for(int i = 0; i<details.size(); i++){
+                summ = summ + MoyenneDetail(details.get(i).getid());
+            }
+        }catch(NotFoundException e){
+            System.out.println("Detail intouvable");
+        }
+        
+        return summ/details.size();
+    }
+    
+    public double MoyenneProf(int id){
+    
+        double summ = 0;
+        ArrayList<DetailBulletin> details = new ArrayList<>();
+        
+        try{
+            Enseignement d = seekerEnseignement(id);
             getmine(d,details);
             for(int i = 0; i<details.size(); i++){
                 summ = summ + MoyenneDetail(details.get(i).getid());
