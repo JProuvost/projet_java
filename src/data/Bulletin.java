@@ -35,6 +35,10 @@ public class Bulletin extends idClasse{
         return idInscription;
     }
     
+    public String getappreciation(){
+        return appreciation;
+    }
+    
     public void modap(String ap){
         appreciation = ap;
     }

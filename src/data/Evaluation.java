@@ -35,6 +35,10 @@ public class Evaluation extends idClasse {
         return note;
     }
     
+    public String getappreciation(){
+        return appreciation;
+    }
+    
     public void modap(String ap){
         appreciation = ap;
     }

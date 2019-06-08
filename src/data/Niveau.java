@@ -23,4 +23,8 @@ public class Niveau extends idClasse {
         nom = b;
     }
     
+    public String getnom(){
+        return nom;
+    }
+    
 }

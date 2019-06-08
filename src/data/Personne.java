@@ -26,4 +26,16 @@ public class Personne extends idClasse {
         prenom = c;
         type = d;
     }
+    
+    public String getnom(){
+        return nom;
+    }
+    
+    public String getprenom(){
+        return prenom;
+    }
+    
+    public String gettype(){
+        return type;
+    }
 }

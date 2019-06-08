@@ -22,4 +22,8 @@ public class Discipline extends idClasse{
         super(a);
         nom = name;
     }
+    
+    public String getnom(){
+        return nom;
+    }
 }

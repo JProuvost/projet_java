@@ -410,7 +410,7 @@ public class Ecole{
         }
     }
     
-    public void supprInscription(int id){
+    public void su1pprInscription(int id){
         
         int i = 0;
         

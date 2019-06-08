@@ -35,4 +35,8 @@ public class Classe extends idClasse{
         return idNiveau;
     }
     
+    public String getnom(){
+        return nom;
+    }
+    
 }

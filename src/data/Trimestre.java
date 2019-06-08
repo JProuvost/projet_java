@@ -38,4 +38,16 @@ public class Trimestre extends idClasse {
         fin = f;
     }
     
+    public String getdebut(){
+        return debut;
+    }
+    
+    public String getfin(){
+        return fin;
+    }
+    
+    public int getnumero(){
+        return numero;
+    }
+    
 }
