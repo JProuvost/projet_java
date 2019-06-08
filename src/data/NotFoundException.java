@@ -7,19 +7,12 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class Discipline extends idClasse{
-    
-    String nom;
-    
-    Discipline(){
-        
+public class NotFoundException extends Exception {
+
+    public NotFoundException() {
+        super();
     }
     
-    Discipline(int a, String name)
-    {
-        super(a);
-        nom = name;
-    }
 }

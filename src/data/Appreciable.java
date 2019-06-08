@@ -7,19 +7,8 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class Discipline extends idClasse{
+public class Appreciable {
     
-    String nom;
-    
-    Discipline(){
-        
-    }
-    
-    Discipline(int a, String name)
-    {
-        super(a);
-        nom = name;
-    }
 }

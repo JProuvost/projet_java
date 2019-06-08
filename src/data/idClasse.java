@@ -7,19 +7,21 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class Discipline extends idClasse{
+class idClasse {
     
-    String nom;
+    int id;
     
-    Discipline(){
+    idClasse(){
         
     }
     
-    Discipline(int a, String name)
-    {
-        super(a);
-        nom = name;
+    idClasse(int a){
+        id = a;
+    }
+    
+    public int getid(){
+        return id;
     }
 }

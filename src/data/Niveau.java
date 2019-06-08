@@ -9,29 +9,18 @@ package data;
  *
  * @author Jean
  */
-public class Niveau {
-    private int id;
+public class Niveau extends idClasse {
+    
     private String nom;
     
     public Niveau(){
         
     }
+    
     public Niveau(int a, String b){
-        id = a;
+        
+        super(a);
         nom = b;
     }
     
-    public int get_id(){
-        return id;
-    }
-    public String get_nom(){
-        return nom;
-    }
-    
-    public void set_id(int a){
-        id = a;
-    }
-    public void set_nom(String a){
-        nom = a;
-    }
 }

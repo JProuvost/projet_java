@@ -9,22 +9,14 @@ package data;
  *
  * @author Jean
  */
-public class AnneeScolaire {
-    private int id;
+public class AnneeScolaire extends idClasse {
+    
     public AnneeScolaire()
     {
         
     }
     public AnneeScolaire(int a)
     {
-        id = a;
-    }
-    public int get_id()
-    {
-        return id;
-    }
-    public void set_id(int id)
-    {
-        this.id = id;
+        super(a);
     }
 }

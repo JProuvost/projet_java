@@ -9,6 +9,33 @@ package data;
  *
  * @author Jean
  */
-public class Evaluation {
+public class Evaluation extends idClasse {
     
+    int idDetailBulletin;
+    double note;
+    String appreciation;
+    
+    Evaluation(){
+        
+    }
+    
+    Evaluation(int a, int b, double c, String d){
+        
+        super(a);
+        idDetailBulletin = b;
+        note = c;
+        appreciation = d;
+    }
+    
+    public int getidDetailBulletin(){
+        return idDetailBulletin;
+    }
+    
+    public double getnote(){
+        return note;
+    }
+    
+    public void modap(String ap){
+        appreciation = ap;
+    }
 }

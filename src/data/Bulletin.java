@@ -9,20 +9,34 @@ package data;
  *
  * @author Jean
  */
-public class Bulletin {
-    private int id;
-    private int idinscription;
+public class Bulletin extends idClasse{
+    
+    private int idTrimestre;
+    private int idInscription;
     private String appreciation;
-    private int idtrimestre;
     
     public Bulletin(){
         
     }
-    public Bulletin(int id , int idinscription, String appreciation, int idtrimestre)
+    
+    public Bulletin(int a , int b, int c, String d)
     {
-        this.id=id;
-        this.idinscription = idinscription;
-        this.idtrimestre = idtrimestre;
-        this.appreciation = appreciation;
+        super(a);
+        idInscription = b;
+        idTrimestre = c;
+        appreciation = d;
     }
+    
+    public int getidTrimestre(){
+        return idTrimestre;
+    }
+    
+    public int getidInscription(){
+        return idInscription;
+    }
+    
+    public void modap(String ap){
+        appreciation = ap;
+    }
+    
 }

@@ -9,52 +9,33 @@ package data;
  *
  * @author Jean
  */
-public class Trimestre {
-    private int id;
+public class Trimestre extends idClasse {
+    
     private int numero;
     private String debut;
     private String fin;
-    private int idannee;
+    private int idAnnee;
     
     public Trimestre(){
         
     }
+    
     public Trimestre(int a, int b, String c, String d, int e){
-        id = a; 
+        
+        super(a);
         numero = b;
         debut = c;
         fin = d;
-        idannee = e;
+        idAnnee = e;
     }
     
-    public int get_id(){
-        return id;
+    public int getidAnnee(){
+        return idAnnee;
     }
-    public int get_numero(){
-        return numero;
+
+    void changerdate(String d, String f) {
+        debut = d;
+        fin = f;
     }
-    public String get_debut(){
-        return debut;
-    }
-    public String get_fin(){
-        return fin;
-    }
-    public int get_idannee(){
-        return idannee;
-    }
-    public void set_id(int a){
-        id = a;
-    }
-    public void set_numero(int a){
-        numero = a;
-    }
-    public void set_debut(String a){
-        debut = a;
-    }
-    public void set_fin(String a){
-        fin = a;
-    }
-    public void set_idannee(int a){
-        idannee = a;
-    }
+    
 }

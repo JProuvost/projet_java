@@ -7,19 +7,16 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class Discipline extends idClasse{
-    
-    String nom;
-    
-    Discipline(){
+public class Principal {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
         
     }
     
-    Discipline(int a, String name)
-    {
-        super(a);
-        nom = name;
-    }
 }
