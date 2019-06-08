@@ -18,7 +18,8 @@ public class Niveau extends idClasse {
     }
     
     public Niveau(int a, String b){
-        id = a;
+        
+        super(a);
         nom = b;
     }
     

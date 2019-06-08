@@ -469,4 +469,45 @@ public class Ecole extends idClasse {
     public void addAnnee(int id){
         annee.add(new AnneeScolaire(id));
     }
+    
+    public void addBulletin(int id, int idIns, int idTri, String appre){
+        bulletin.add(new Bulletin(id, idIns, idTri, appre));
+    }
+    
+    public void addClasse(int id, String nom, int idNiveau, int idAnnee){
+        classe.add(new Classe(id, nom, idNiveau, idAnnee));
+    }
+    
+    public void addDetail(int id, int idBull, int idEns, String appre){
+        detail.add(new DetailBulletin(id, idBull, idEns, appre));
+    }
+    
+    public void addDiscipline(int id, String nom){
+        discipline.add(new Discipline(id, nom));
+    }
+    
+    public void addEnseignement(int id, int idDisci, int idCla, int idPerso){
+        enseignement.add(new Enseignement(id, idDisci, idCla, idPerso));
+    }
+    
+    public void addEvaluation(int id, int idDeta, double note, String appre){
+        evaluation.add(new Evaluation(id, idDeta, note, appre));
+    }
+    
+    public void addInscription(int id, int idCla, int idPerso){
+        inscription.add(new Inscription(id, idCla, idPerso));
+    }
+    
+    public void addNiveau(int id, String nom){
+        niveau.add(new Niveau(id, nom));
+    }
+    
+    public void addPersonne(int id, String nom, String prenom){
+        personne.add(new Personne(id, nom, prenom));
+    }
+    
+    public void addTrimestre(int id, int numero, String debut, String fin, int idA){
+        trimestre.add(new Trimestre(id, numero, debut, fin, idA));
+    }
+    
 }

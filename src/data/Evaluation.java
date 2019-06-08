@@ -19,6 +19,14 @@ public class Evaluation extends idClasse {
         
     }
     
+    Evaluation(int a, int b, double c, String d){
+        
+        super(a);
+        idDetailBulletin = b;
+        note = c;
+        appreciation = d;
+    }
+    
     public int getidDetailBulletin(){
         return idDetailBulletin;
     }

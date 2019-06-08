@@ -13,16 +13,15 @@ public class Personne extends idClasse {
     
     private String nom;
     private String prenom;
-    private String type;
     
     public Personne(){
         
     }
     
-    public Personne(int a, String b, String c, String d){
-        id = a;
+    public Personne(int a, String b, String c){
+        
+        super(a);
         nom = b;
         prenom = c;
-        type = d;
     }
 }

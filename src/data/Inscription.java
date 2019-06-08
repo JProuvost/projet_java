@@ -18,7 +18,8 @@ public class Inscription extends idClasse {
     }
     
     public Inscription(int a, int b, int c){
-        id = a;
+        
+        super(a);
         idClasse = b;
         idPersonne= c;
     }

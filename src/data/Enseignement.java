@@ -20,7 +20,8 @@ public class Enseignement extends idClasse {
     }
     
     public Enseignement(int a, int b, int c, int d){
-        id = a;
+        
+        super(a);
         idDiscipline = b;
         idClasse = c;
         idPersonne = d;

@@ -21,7 +21,8 @@ public class Trimestre extends idClasse {
     }
     
     public Trimestre(int a, int b, String c, String d, int e){
-        id = a; 
+        
+        super(a);
         numero = b;
         debut = c;
         fin = d;
