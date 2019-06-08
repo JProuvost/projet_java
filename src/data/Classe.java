@@ -18,9 +18,10 @@ public class Classe extends idClasse{
     public Classe(){
         
     }
+    
     public Classe(int a, String b, int c, int d)
     {
-        id=a;
+        super(a);
         nom=b;
         idNiveau=c;
         idAnnee=d;

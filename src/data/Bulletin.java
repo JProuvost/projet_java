@@ -19,12 +19,12 @@ public class Bulletin extends idClasse{
         
     }
     
-    public Bulletin(int id , int idinscription, String appreciation, int idtrimestre)
+    public Bulletin(int a , int b, int c, String d)
     {
-        this.id=id;
-        this.idInscription = idinscription;
-        this.idTrimestre = idtrimestre;
-        this.appreciation = appreciation;
+        super(a);
+        idInscription = b;
+        idTrimestre = c;
+        appreciation = d;
     }
     
     public int getidTrimestre(){

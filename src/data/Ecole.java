@@ -6,6 +6,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -171,6 +172,301 @@ public class Ecole extends idClasse {
         }
     }
     
-    public void seek()
+    public HashMap<String,idClasse> whoamI(Classe a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<niveau.size() ; i++)
+        {
+            if(niveau.get(i).getid() == a.getidNiveau()){
+                I.put("Niveau", niveau.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<annee.size() ; i++)
+        {
+            if(annee.get(i).getid() == a.getidAnnee()){
+                I.put("AnneeScolaire", annee.get(i));
+            }
+        }
+        
+        return I;
+    }
     
+     public HashMap<String,idClasse> whoamI(Enseignement a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<classe.size() ; i++)
+        {
+            if(classe.get(i).getid() == a.getidClasse()){
+                I.put("Classe", classe.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<discipline.size() ; i++)
+        {
+            if(discipline.get(i).getid() == a.getidDiscipline()){
+                I.put("Discipline", discipline.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<personne.size() ; i++)
+        {
+            if(personne.get(i).getid() == a.getidPersonne()){
+                I.put("Personne", personne.get(i));
+            }
+        }
+        
+        return I;
+    }
+    
+     public HashMap<String,idClasse> whoamI(Trimestre a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<annee.size() ; i++)
+        {
+            if(annee.get(i).getid() == a.getidAnnee()){
+                I.put("AnneeScolaire", annee.get(i));
+            }
+        }
+        
+        return I;
+    }
+     
+    public HashMap<String,idClasse> whoamI(Inscription a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<classe.size() ; i++)
+        {
+            if(classe.get(i).getid() == a.getidClasse()){
+                I.put("Classe", classe.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<personne.size() ; i++)
+        {
+            if(personne.get(i).getid() == a.getidPersonne()){
+                I.put("Personne", personne.get(i));
+            }
+        }
+        
+        return I;
+    }
+    
+    public HashMap<String,idClasse> whoamI(Bulletin a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<inscription.size() ; i++)
+        {
+            if(inscription.get(i).getid() == a.getidInscription()){
+                I.put("Inscription", inscription.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<trimestre.size() ; i++)
+        {
+            if(trimestre.get(i).getid() == a.getidTrimestre()){
+                I.put("Trimestre", trimestre.get(i));
+            }
+        }
+        
+        return I;
+    }
+    
+    public HashMap<String,idClasse> whoamI(DetailBulletin a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<bulletin.size() ; i++)
+        {
+            if(bulletin.get(i).getid() == a.getidBulletin()){
+                I.put("Bulletin", bulletin.get(i));
+            }
+        }
+        
+        for(int i = 0 ; i<enseignement.size() ; i++)
+        {
+            if(enseignement.get(i).getid() == a.getidEnseignement()){
+                I.put("Enseignement", enseignement.get(i));
+            }
+        }
+        
+        return I;
+    }
+    
+    public HashMap<String,idClasse> whoamI(Evaluation a){
+        
+        HashMap<String,idClasse> I = new HashMap<>();
+        
+        for(int i = 0 ; i<detail.size() ; i++)
+        {
+            if(detail.get(i).getid() == a.getidDetailBulletin()){
+                I.put("DetailBulletin", detail.get(i));
+            }
+        }
+        
+        return I;
+    }
+    
+    public void supprAnnee(int id){
+        
+        int i = 0;
+        
+        while(i<annee.size())
+        {
+            if(annee.get(i).getid() == id){
+               annee.remove(i);
+               i = annee.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprTrimestre(int id){
+        
+        int i = 0;
+        
+        while(i<trimestre.size())
+        {
+            if(trimestre.get(i).getid() == id){
+               trimestre.remove(i);
+               i = trimestre.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprNiveau(int id){
+        
+        int i = 0;
+        
+        while(i<niveau.size())
+        {
+            if(niveau.get(i).getid() == id){
+               niveau.remove(i);
+               i = niveau.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprClasse(int id){
+        
+        int i = 0;
+        
+        while(i<classe.size())
+        {
+            if(classe.get(i).getid() == id){
+               classe.remove(i);
+               i = classe.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprDiscipline(int id){
+        
+        int i = 0;
+        
+        while(i<discipline.size())
+        {
+            if(discipline.get(i).getid() == id){
+               discipline.remove(i);
+               i = discipline.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprPersonne(int id){
+        
+        int i = 0;
+        
+        while(i<personne.size())
+        {
+            if(personne.get(i).getid() == id){
+               personne.remove(i);
+               i = personne.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprEnseignement(int id){
+        
+        int i = 0;
+        
+        while(i<enseignement.size())
+        {
+            if(enseignement.get(i).getid() == id){
+               enseignement.remove(i);
+               i = enseignement.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprInscription(int id){
+        
+        int i = 0;
+        
+        while(i<inscription.size())
+        {
+            if(inscription.get(i).getid() == id){
+               inscription.remove(i);
+               i = inscription.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprBulletin(int id){
+        
+        int i = 0;
+        
+        while(i<bulletin.size())
+        {
+            if(bulletin.get(i).getid() == id){
+               bulletin.remove(i);
+               i = bulletin.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprDetail(int id){
+        
+        int i = 0;
+        
+        while(i<detail.size())
+        {
+            if(detail.get(i).getid() == id){
+               detail.remove(i);
+               i = detail.size();
+            }
+            i++;
+        }
+    }
+    
+    public void supprEvaluation(int id){
+        
+        int i = 0;
+        
+        while(i<evaluation.size())
+        {
+            if(evaluation.get(i).getid() == id){
+               evaluation.remove(i);
+               i = evaluation.size();
+            }
+            i++;
+        }
+    }
+    
+    public void addAnnee(int id){
+        annee.add(new AnneeScolaire(id));
+    }
 }

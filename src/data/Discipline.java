@@ -16,4 +16,10 @@ public class Discipline extends idClasse{
     Discipline(){
         
     }
+    
+    Discipline(int a, String name)
+    {
+        super(a);
+        nom = name;
+    }
 }

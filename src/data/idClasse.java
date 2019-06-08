@@ -13,6 +13,14 @@ class idClasse {
     
     int id;
     
+    idClasse(){
+        
+    }
+    
+    idClasse(int a){
+        id = a;
+    }
+    
     public int getid(){
         return id;
     }

@@ -20,7 +20,7 @@ public class DetailBulletin extends idClasse{
     }
     
     public DetailBulletin(int a, int b, int c, String d){
-        id = a;
+        super(a);
         idBulletin = b;
         idEnseignement = c;
         appreciation = d;

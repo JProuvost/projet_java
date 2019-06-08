@@ -17,14 +17,11 @@ public class AnneeScolaire extends idClasse {
     }
     public AnneeScolaire(int a)
     {
-        id = a;
+        super(a);
     }
+    
     public int get_id()
     {
         return id;
-    }
-    public void set_id(int id)
-    {
-        this.id = id;
     }
 }
