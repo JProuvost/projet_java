@@ -30,4 +30,8 @@ public class Evaluation extends idClasse {
     public int getidDetailBulletin(){
         return idDetailBulletin;
     }
+    
+    public double getnote(){
+        return note;
+    }
 }

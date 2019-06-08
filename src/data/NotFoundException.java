@@ -7,16 +7,12 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class AnneeScolaire extends idClasse {
+public class NotFoundException extends Exception {
+
+    public NotFoundException() {
+        super();
+    }
     
-    public AnneeScolaire()
-    {
-        
-    }
-    public AnneeScolaire(int a)
-    {
-        super(a);
-    }
 }

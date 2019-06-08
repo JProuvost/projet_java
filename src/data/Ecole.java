@@ -502,12 +502,159 @@ public class Ecole extends idClasse {
         niveau.add(new Niveau(id, nom));
     }
     
-    public void addPersonne(int id, String nom, String prenom){
-        personne.add(new Personne(id, nom, prenom));
+    public void addPersonne(int id, String nom, String prenom, String type){
+        personne.add(new Personne(id, nom, prenom, type));
     }
     
     public void addTrimestre(int id, int numero, String debut, String fin, int idA){
         trimestre.add(new Trimestre(id, numero, debut, fin, idA));
     }
+    
+    public AnneeScolaire seekerAnnee(int a) throws NotFoundException{
+        
+        for(int i = 0; i<annee.size(); i++){
+            if(annee.get(i).getid() == a){
+                return annee.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Bulletin seekerBulletin(int a) throws NotFoundException{
+        
+        for(int i = 0; i<bulletin.size(); i++){
+            if(bulletin.get(i).getid() == a){
+                return bulletin.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Classe seekerClasse(int a) throws NotFoundException{
+        
+        for(int i = 0; i<classe.size(); i++){
+            if(classe.get(i).getid() == a){
+                return classe.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public DetailBulletin seekerDetail(int a) throws NotFoundException{
+        
+        for(int i = 0; i<detail.size(); i++){
+            if(detail.get(i).getid() == a){
+                return detail.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Discipline seekerDiscipline(int a) throws NotFoundException{
+        
+        for(int i = 0; i<discipline.size(); i++){
+            if(discipline.get(i).getid() == a){
+                return discipline.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Enseignement seekerEnseignement(int a) throws NotFoundException{
+        
+        for(int i = 0; i<enseignement.size(); i++){
+            if(enseignement.get(i).getid() == a){
+                return enseignement.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Evaluation seekerEvaluation(int a) throws NotFoundException{
+        
+        for(int i = 0; i<evaluation.size(); i++){
+            if(evaluation.get(i).getid() == a){
+                return evaluation.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Inscription seekerInscription(int a) throws NotFoundException{
+        
+        for(int i = 0; i<inscription.size(); i++){
+            if(inscription.get(i).getid() == a){
+                return inscription.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Niveau seekerNiveau(int a) throws NotFoundException{
+        
+        for(int i = 0; i<niveau.size(); i++){
+            if(niveau.get(i).getid() == a){
+                return niveau.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Personne seekerPersonne(int a) throws NotFoundException{
+        
+        for(int i = 0; i<personne.size(); i++){
+            if(personne.get(i).getid() == a){
+                return personne.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public Trimestre seekerTrimestre(int a) throws NotFoundException{
+        
+        for(int i = 0; i<trimestre.size(); i++){
+            if(trimestre.get(i).getid() == a){
+                return trimestre.get(i);
+            }
+        }
+        throw new NotFoundException();
+    }
+    
+    public double MoyenneDetail(int id){
+    
+        double summ = 0;
+        ArrayList<Evaluation> evals = new ArrayList<>();
+        
+        try{
+            DetailBulletin d = seekerDetail(id);
+            getmine(d,evals);
+            for(int i = 0; i<evals.size(); i++){
+                summ = summ + evals.get(i).getnote();
+            }
+        }catch(NotFoundException e){
+            System.out.println("Detail intouvable");
+        }
+        
+        return summ/evals.size();
+    }
+    
+    public double moyenneBulletin(int id){
+    
+        double summ = 0;
+        ArrayList<DetailBulletin> details = new ArrayList<>();
+        
+        try{
+            Bulletin d = seekerBulletin(id);
+            getmine(d,details);
+            for(int i = 0; i<details.size(); i++){
+                summ = summ + MoyenneDetail(details.get(i).getid());
+            }
+        }catch(NotFoundException e){
+            System.out.println("Detail intouvable");
+        }
+        
+        return summ/details.size();
+    }
+    
     
 }

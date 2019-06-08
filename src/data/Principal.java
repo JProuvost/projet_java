@@ -7,16 +7,16 @@ package data;
 
 /**
  *
- * @author Jean
+ * @author Mikhali
  */
-public class AnneeScolaire extends idClasse {
-    
-    public AnneeScolaire()
-    {
+public class Principal {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
         
     }
-    public AnneeScolaire(int a)
-    {
-        super(a);
-    }
+    
 }
