@@ -9,41 +9,32 @@ package data;
  *
  * @author Jean
  */
-public class Enseignement {
-    private int id;
-    private int iddiscipline;
-    private int idclasse;
-    private int idpersonne;
+public class Enseignement extends idClasse {
+    
+    private int idClasse;
+    private int idDiscipline;
+    private int idPersonne;
+    
     public Enseignement(){    
+    
     }
+    
     public Enseignement(int a, int b, int c, int d){
         id = a;
-        iddiscipline = b;
-        idclasse = c;
-        idpersonne = d;
+        idDiscipline = b;
+        idClasse = c;
+        idPersonne = d;
     }
-    public int get_id(){
-        return id;
+    
+    public int getidClasse(){
+        return idClasse;
     }
-    public int get_iddiscipline(){
-        return iddiscipline;
+    
+    public int getidPersonne(){
+        return idClasse;
     }
-    public int get_idclasse(){
-        return idclasse;
-    }
-    public int get_idpersonne(){
-        return idpersonne;
-    }
-    public void set_id(int a){
-        id = a;
-    }
-    public void set_iddiscipline(int a){
-        iddiscipline= a;
-    }
-    public void set_idclasse(int a){
-        idclasse = a;
-    }
-    public void set_idpersonne(int a){
-        idpersonne = a;
+    
+    public int getidDiscipline(){
+        return idClasse;
     }
 }

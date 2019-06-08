@@ -9,6 +9,17 @@ package data;
  *
  * @author Jean
  */
-public class Evaluation {
+public class Evaluation extends idClasse {
     
+    int idDetailBulletin;
+    double note;
+    String appreciation;
+    
+    Evaluation(){
+        
+    }
+    
+    public int getidDetailBulletin(){
+        return idDetailBulletin;
+    }
 }

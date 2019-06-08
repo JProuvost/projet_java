@@ -9,44 +9,29 @@ package data;
  *
  * @author Jean
  */
-public class DetailBulletin {
-    private int id;
-    private int idbulletin;
-    private int idenseignement;
+public class DetailBulletin extends idClasse{
+    
+    private int idBulletin;
+    private int idEnseignement;
     private String appreciation;
     
     public DetailBulletin(){
         
     }
+    
     public DetailBulletin(int a, int b, int c, String d){
         id = a;
-        idbulletin = b;
-        idenseignement = c;
+        idBulletin = b;
+        idEnseignement = c;
         appreciation = d;
     }
-    public int get_id(){
-        return id;
+    
+    public int getidBulletin(){
+        return idBulletin;
     }
-    public int get_idbulletin(){
-        return idbulletin;
+    
+    public int getidEnseignement(){
+        return idEnseignement;
     }
-    public int get_idenseignement(){
-        return idenseignement;
-    }
-    public String get_appreciation(){
-        return appreciation;
-    }
-    public void set_id(int a)
-    {
-        id=a;
-    }
-    public void set_idbulletin(int a){
-        idbulletin = a;
-    }
-    public void set_idenseignement(int a){
-        idenseignement = a;
-    }
-    public void set_appreciation(String a){
-        appreciation = a;
-    }
+    
 }

@@ -9,6 +9,11 @@ package data;
  *
  * @author Jean
  */
-public class Discipline {
+public class Discipline extends idClasse{
     
+    String nom;
+    
+    Discipline(){
+        
+    }
 }

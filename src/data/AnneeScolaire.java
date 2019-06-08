@@ -9,8 +9,8 @@ package data;
  *
  * @author Jean
  */
-public class AnneeScolaire {
-    private int id;
+public class AnneeScolaire extends idClasse {
+    
     public AnneeScolaire()
     {
         

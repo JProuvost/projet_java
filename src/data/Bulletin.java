@@ -9,20 +9,30 @@ package data;
  *
  * @author Jean
  */
-public class Bulletin {
-    private int id;
-    private int idinscription;
+public class Bulletin extends idClasse{
+    
+    private int idTrimestre;
+    private int idInscription;
     private String appreciation;
-    private int idtrimestre;
     
     public Bulletin(){
         
     }
+    
     public Bulletin(int id , int idinscription, String appreciation, int idtrimestre)
     {
         this.id=id;
-        this.idinscription = idinscription;
-        this.idtrimestre = idtrimestre;
+        this.idInscription = idinscription;
+        this.idTrimestre = idtrimestre;
         this.appreciation = appreciation;
     }
+    
+    public int getidTrimestre(){
+        return idTrimestre;
+    }
+    
+    public int getidInscription(){
+        return idInscription;
+    }
+    
 }
