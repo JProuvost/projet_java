@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Mikhali
  */
-public class Ecole extends idClasse {
+public class Ecole{
 
     String nom;
     ArrayList<AnneeScolaire> annee;
@@ -466,15 +466,17 @@ public class Ecole extends idClasse {
         }
     }
     
-    public void addAnnee(int id){
+    public void addAnnee(){
+        int id = annee.size();
         annee.add(new AnneeScolaire(id));
-        addTrimestre(trimestre.size(), 1, "7 septembre", "20 decembre", id);
-        addTrimestre(trimestre.size(), 2, "6 janvier", "21 mars", id);
-        addTrimestre(trimestre.size(), 3, "7 avril", "25 juin", id);
+        addTrimestre(1, "7 septembre", "20 decembre", id);
+        addTrimestre(2, "6 janvier", "21 mars", id);
+        addTrimestre(3, "7 avril", "25 juin", id);
     }
     
-    public void addBulletin(int id, int idIns, int idTri, String appre){
+    public void addBulletin(int idIns, int idTri, String appre){
         
+        int id=bulletin.size();
         bulletin.add(new Bulletin(id, idIns, idTri, appre));
         ArrayList<Enseignement> ens = new ArrayList<>();
         
@@ -488,32 +490,38 @@ public class Ecole extends idClasse {
         }
         
         for(int i = 0; i<ens.size(); i++){
-            addDetail(detail.size(), id, ens.get(i).getid(),"");
+            addDetail(id, ens.get(i).getid(),"");
         }       
     }
     
-    public void addClasse(int id, String nom, int idNiveau, int idAnnee){
+    public void addClasse(String nom, int idNiveau, int idAnnee){
+        int id = classe.size();
         classe.add(new Classe(id, nom, idNiveau, idAnnee));
     }
     
-    public void addDetail(int id, int idBull, int idEns, String appre){
+    public void addDetail(int idBull, int idEns, String appre){
+        int id = detail.size();
         detail.add(new DetailBulletin(id, idBull, idEns, appre));
     }
     
-    public void addDiscipline(int id, String nom){
+    public void addDiscipline(String nom){
+        int id = discipline.size();
         discipline.add(new Discipline(id, nom));
     }
     
-    public void addEnseignement(int id, int idDisci, int idCla, int idPerso){
+    public void addEnseignement(int idDisci, int idCla, int idPerso){
+        int id = enseignement.size();
         enseignement.add(new Enseignement(id, idDisci, idCla, idPerso));
     }
     
-    public void addEvaluation(int id, int idDeta, double note, String appre){
+    public void addEvaluation(int idDeta, double note, String appre){
+        int id = evaluation.size();
         evaluation.add(new Evaluation(id, idDeta, note, appre));
     }
     
-    public void addInscription(int id, int idCla, int idPerso){
+    public void addInscription(int idCla, int idPerso){
         
+        int id = inscription.size();
         inscription.add(new Inscription(id, idCla, idPerso));
         ArrayList<Trimestre> T = new ArrayList<>();
                 
@@ -527,19 +535,22 @@ public class Ecole extends idClasse {
         }
         
         for(int i=0; i<T.size(); i++){
-            addBulletin(bulletin.size(), id, T.get(i).getid(), "");
+            addBulletin(id, T.get(i).getid(), "");
         }
     }
     
-    public void addNiveau(int id, String nom){
+    public void addNiveau(String nom){
+        int id = niveau.size();
         niveau.add(new Niveau(id, nom));
     }
     
-    public void addPersonne(int id, String nom, String prenom, String type){
+    public void addPersonne(String nom, String prenom, String type){
+        int id = personne.size();
         personne.add(new Personne(id, nom, prenom, type));
     }
     
-    public void addTrimestre(int id, int numero, String debut, String fin, int idA){
+    public void addTrimestre(int numero, String debut, String fin, int idA){
+        int id = trimestre.size();
         trimestre.add(new Trimestre(id, numero, debut, fin, idA));
     }
     
@@ -746,6 +757,12 @@ public class Ecole extends idClasse {
                                 System.out.println("verifiez le nom du choix");
                                 break;
                         }
+    }
+    
+    //doit etre modifié si blindage des createurs
+    public void addnewIns(int idClasse,String nom, String prenom){
+        addInscription(idClasse, personne.size());
+        addPersonne(nom,prenom,"Eleve");        
     }
     
 }
