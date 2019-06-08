@@ -7,7 +7,9 @@ package data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import Connexion.*;
+import java.sql.SQLException;
+import jdbcv2018.Connexion;
 /**
  *
  * @author Mikhali
@@ -30,8 +32,40 @@ public class Ecole{
     public Ecole(){
         
     }
-    
-    
+    /**
+     * initialise toutes les arraylist
+     */
+    public void init(){
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<AnneeScolaire> anneescolaireDAO= new AnneeScolaireDAO(connexion);
+            DAO<Bulletin> bulletinDAO= new BulletinDAO(connexion);
+            DAO<Classe> classeDAO= new ClasseDAO(connexion);
+            DAO<DetailBulletin> detailbulletinDAO= new DetailBulletinDAO(connexion);
+            DAO<Discipline> disciplineDAO= new DisciplineDAO(connexion);
+            DAO<Trimestre> trimestreDAO= new TrimestreDAO(connexion);
+            DAO<Enseignement> enseignementDAO= new EnseignementDAO(connexion);
+            DAO<Evaluation> evaluationDAO= new EvaluationDAO(connexion);
+            DAO<Inscription> inscriptionDAO= new InscriptionDAO(connexion);
+            DAO<Niveau> niveauDAO= new NiveauDAO(connexion);
+            DAO<Personne> personneDAO= new PersonneDAO(connexion);
+            
+            annee = anneescolaireDAO.tout();
+            trimestre = trimestreDAO.tout();
+            niveau = niveauDAO.tout();
+            classe = classeDAO.tout();
+            discipline = disciplineDAO.tout();
+            personne = personneDAO.tout();
+            enseignement = enseignementDAO.tout();
+            inscription = inscriptionDAO.tout();
+            bulletin= bulletinDAO.tout();
+            detail = detailbulletinDAO.tout();
+            evaluation = evaluationDAO.tout();
+            
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     //get mine
     public void getmine(AnneeScolaire a, ArrayList<Trimestre> myTrimestre, ArrayList<Classe> myClasse){
         
