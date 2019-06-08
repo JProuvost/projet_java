@@ -27,10 +27,12 @@ public class Ecole{
     ArrayList<DetailBulletin> detail;
     ArrayList<Evaluation> evaluation;
     
-    Ecole(){
+    public Ecole(){
         
     }
     
+    
+    //get mine
     public void getmine(AnneeScolaire a, ArrayList<Trimestre> myTrimestre, ArrayList<Classe> myClasse){
         
         for(int i = 0 ; i<trimestre.size() ; i++)
@@ -172,6 +174,8 @@ public class Ecole{
         }
     }
     
+    
+    //who am I ?
     public HashMap<String,idClasse> whoamI(Classe a){
         
         HashMap<String,idClasse> I = new HashMap<>();
@@ -312,6 +316,8 @@ public class Ecole{
         return I;
     }
     
+    
+    //suppression
     public void supprAnnee(int id){
         
         int i = 0;
@@ -410,7 +416,7 @@ public class Ecole{
         }
     }
     
-    public void su1pprInscription(int id){
+    public void supprInscription(int id){
         
         int i = 0;
         
@@ -466,6 +472,8 @@ public class Ecole{
         }
     }
     
+    
+    //ajout
     public void addAnnee(){
         int id = annee.size();
         annee.add(new AnneeScolaire(id));
@@ -554,6 +562,13 @@ public class Ecole{
         trimestre.add(new Trimestre(id, numero, debut, fin, idA));
     }
     
+    public void addnewIns(int idClasse,String nom, String prenom){
+        addInscription(idClasse, personne.size());
+        addPersonne(nom,prenom,"Eleve");        
+    } //doit etre modifié si blindage des createurs
+    
+    
+    //seeker
     public AnneeScolaire seekerAnnee(int a) throws NotFoundException{
         
         for(int i = 0; i<annee.size(); i++){
@@ -664,14 +679,8 @@ public class Ecole{
         throw new NotFoundException();
     }
     
-    public void modifierTrimestre(int idT, String debut, String fin){
-        try{
-            seekerTrimestre(idT).changerdate(debut,fin);
-            }catch(NotFoundException e){
-            System.out.print("Le Trimestre n'existe pas");
-        }
-    }
     
+    //moyenne & calcul divers
     public double MoyenneDetail(int id){
     
         double summ = 0;
@@ -726,6 +735,15 @@ public class Ecole{
         return summ/details.size();
     }
     
+    //misc
+    public void modifierTrimestre(int idT, String debut, String fin){
+        try{
+            seekerTrimestre(idT).changerdate(debut,fin);
+            }catch(NotFoundException e){
+            System.out.print("Le Trimestre n'existe pas");
+        }
+    }
+    
     public void modappre(int id, String type, String mod){
         switch (type) 
                         {
@@ -757,12 +775,6 @@ public class Ecole{
                                 System.out.println("verifiez le nom du choix");
                                 break;
                         }
-    }
-    
-    //doit etre modifié si blindage des createurs
-    public void addnewIns(int idClasse,String nom, String prenom){
-        addInscription(idClasse, personne.size());
-        addPersonne(nom,prenom,"Eleve");        
     }
     
 }

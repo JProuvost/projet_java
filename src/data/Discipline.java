@@ -13,11 +13,11 @@ public class Discipline extends idClasse{
     
     String nom;
     
-    Discipline(){
+    public Discipline(){
         
     }
     
-    Discipline(int a, String name)
+    public Discipline(int a, String name)
     {
         super(a);
         nom = name;
