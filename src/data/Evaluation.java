@@ -34,4 +34,8 @@ public class Evaluation extends idClasse {
     public double getnote(){
         return note;
     }
+    
+    public void modap(String ap){
+        appreciation = ap;
+    }
 }

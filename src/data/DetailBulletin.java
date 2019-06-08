@@ -34,4 +34,7 @@ public class DetailBulletin extends idClasse{
         return idEnseignement;
     }
     
+    public void modap(String ap){
+        appreciation = ap;
+    }
 }

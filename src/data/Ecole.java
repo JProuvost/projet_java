@@ -715,5 +715,37 @@ public class Ecole extends idClasse {
         return summ/details.size();
     }
     
+    public void modappre(int id, String type, String mod){
+        switch (type) 
+                        {
+                            case "Bulletin":
+                                try{
+                                    seekerBulletin(id).modap(mod);
+                                }catch(NotFoundException e){
+                                    System.out.println("Le Bulletin n'existe pas");
+                                }
+                            break;
+                                
+                            case "Detail":
+                                try{
+                                    seekerDetail(id).modap(mod);
+                                }catch(NotFoundException e){
+                                    System.out.println("Le Detail de Bulletin n'existe pas");
+                                }
+                            break;
+                                
+                            case "Evaluation":
+                                try{
+                                    seekerEvaluation(id).modap(mod);
+                                }catch(NotFoundException e){
+                                    System.out.println("L'Evaluation n'existe pas");
+                                }
+                            break;
+                                
+                            default:
+                                System.out.println("verifiez le nom du choix");
+                                break;
+                        }
+    }
     
 }
