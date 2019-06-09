@@ -36,6 +36,8 @@ public class Ecole{
         trimestre.add(new Trimestre());
         niveau = new ArrayList<>();
         niveau.add(new Niveau());
+        classe = new ArrayList<>();
+        classe.add(new Classe());
         discipline = new ArrayList<>();
         discipline.add(new Discipline());
         personne = new ArrayList<>();
