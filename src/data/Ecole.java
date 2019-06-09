@@ -744,6 +744,9 @@ public class Ecole{
         try{
             DetailBulletin d = seekerDetail(id);
             getmine(d,evals);
+            if(evals.isEmpty()){
+                return 0;
+            }
             for(int i = 0; i<evals.size(); i++){
                 summ = summ + evals.get(i).getnote();
             }
@@ -772,6 +775,24 @@ public class Ecole{
         return summ/details.size();
     }
     
+    public double MoyenneEleve(int id){
+        
+        double summ = 0;
+        ArrayList<Bulletin> bulletine = new ArrayList<>();
+        
+        try{
+            Inscription d = seekerInscription(id);
+            getmine(d,bulletine);
+            for(int i = 0; i<bulletine.size(); i++){
+                summ = summ + MoyenneBulletin(bulletine.get(i).getid());
+            }
+        }catch(NotFoundException e){
+            System.out.println("Detail intouvable");
+        }
+        
+        return summ/bulletine.size();
+    }
+    
     public double MoyenneProf(int id){
     
         double summ = 0;
@@ -789,6 +810,24 @@ public class Ecole{
         
         return summ/details.size();
     }
+    
+    public double MoyenneClasse(int id){
+        double summ = 0;
+        ArrayList<Inscription> eleve = new ArrayList<>();
+        
+        try{
+            Classe d = seekerClasse(id);
+            getmine(d, new ArrayList<Enseignement>(), eleve);
+            for(int i = 0; i<eleve.size(); i++){
+                summ = summ + MoyenneEleve(eleve.get(i).getid());
+            }
+        }catch(NotFoundException e){
+            System.out.println("Detail intouvable");
+        }
+        
+        return summ/eleve.size();
+    }
+    
     
     //misc
     public void modifierTrimestre(int idT, String debut, String fin){
