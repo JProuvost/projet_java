@@ -30,7 +30,26 @@ public class Ecole{
     ArrayList<Evaluation> evaluation;
     
     public Ecole(){
-        
+        annee = new ArrayList<>();
+        annee.add(new AnneeScolaire());
+        trimestre = new ArrayList<>();
+        trimestre.add(new Trimestre());
+        niveau = new ArrayList<>();
+        niveau.add(new Niveau());
+        discipline = new ArrayList<>();
+        discipline.add(new Discipline());
+        personne = new ArrayList<>();
+        personne.add(new Personne());
+        enseignement = new ArrayList<>();
+        enseignement.add(new Enseignement());
+        inscription = new ArrayList<>();
+        inscription.add(new Inscription());
+        bulletin = new ArrayList<>();
+        bulletin.add(new Bulletin());
+        detail = new ArrayList<>();
+        detail.add(new DetailBulletin());
+        evaluation = new ArrayList<>();
+        evaluation.add(new Evaluation());
     }
     /**
      * initialise toutes les arraylist
