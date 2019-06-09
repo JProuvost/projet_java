@@ -32,10 +32,10 @@ public class Enseignement extends idClasse {
     }
     
     public int getidPersonne(){
-        return idClasse;
+        return idPersonne;
     }
     
     public int getidDiscipline(){
-        return idClasse;
+        return idDiscipline;
     }
 }
