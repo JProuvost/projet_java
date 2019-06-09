@@ -26,6 +26,7 @@ public class Selannee extends javax.swing.JPanel {
         f_annee = new javax.swing.JLabel();
         f_annee_n = new javax.swing.JTextField();
         valider = new javax.swing.JButton();
+        ajouterannee = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Actuelle :");
@@ -49,13 +50,23 @@ public class Selannee extends javax.swing.JPanel {
                 validerActionPerformed(evt);
             }
         });
+        
+        ajouterannee.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        ajouterannee.setText("Valider");
+        ajouterannee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ajouterannneeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
+                .addGap(30, 30, 30)
+                .addComponent(ajouterannee)
+                .addGap(106, 106, 106)
                 .addComponent(valider)
                 .addGap(0, 159, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -80,7 +91,9 @@ public class Selannee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(f_annee_n)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addGap(41, 41, 41)
+                .addGap(21, 21, 21)
+                .addComponent(ajouterannee)
+                .addGap(21, 21, 21)
                 .addComponent(valider)
                 .addGap(28, 28, 28))
         );
@@ -94,12 +107,18 @@ public class Selannee extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
         
-    }                                         
-
+    }
+    
     private void validerActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         content.add(new ModifierTrimestre(ecole,annee),"ModifierTrimestre");
-        Fenetre.changePanel("ModifierTrimestre");
+        Fenetre.changePanel("Page");
+    } 
+
+    private void ajouterannneeActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        // TODO add your handling code here:
+        ecole.addAnnee();
+        Fenetre.changePanel("Acceuil");
     }                                       
 
 
@@ -109,6 +128,7 @@ public class Selannee extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton valider;
+    private javax.swing.JButton ajouterannee;
     public static int annee =2018;
     // End of variables declaration                   
 }
