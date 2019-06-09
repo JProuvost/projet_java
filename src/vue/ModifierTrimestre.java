@@ -10,6 +10,7 @@ import data.Classe;
 import data.AnneeScolaire;
 import data.Ecole;
 import java.util.ArrayList;
+import static vue.Fenetre.ecole;
 
 /**
  *
@@ -26,10 +27,10 @@ public class ModifierTrimestre extends javax.swing.JPanel {
         {
             Fenetre.changePanel("accueil");
         }
-        initComponents();
+        initComponents(b);
     }
                         
-    private void initComponents() {
+    private void initComponents(int b) {
 
         T1_debut = new javax.swing.JTextField();
         T1_fin = new javax.swing.JTextField();
@@ -100,7 +101,7 @@ public class ModifierTrimestre extends javax.swing.JPanel {
         valider.setText("Valider");
         valider.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                validerActionPerformed(evt);
+                validerActionPerformed(evt,b);
             }
         });
 
@@ -181,33 +182,49 @@ public class ModifierTrimestre extends javax.swing.JPanel {
 
     private void T1_debutActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
-
-                                                                        
-
+        t1d=T1_debut.getText();
+    }   
+    
     private void T1_finActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+        t1f=T1_fin.getText();
     }                                      
 
     private void T2_debutActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        t2d=T2_debut.getText();
     }                                        
 
     private void T2_finActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+        t2f=T2_fin.getText();
     }                                      
 
     private void T3_debutActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        t3d=T3_debut.getText();
     }                                        
 
     private void T3_finActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+        t3f=T3_fin.getText();
     }                                      
     
-    private void validerActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void validerActionPerformed(java.awt.event.ActionEvent evt,int b) {                                        
         // TODO add your handling code here:
         
+        ArrayList<Trimestre> t = new ArrayList<>();
+        
+        try{
+            AnneeScolaire a = ecole.seekerAnnee(b);
+            ecole.getmine(a, t, new ArrayList<Classe>());
+        }catch(Exception e){
+            Fenetre.changePanel("accueil");
+        }
+        
+        ecole.modifierTrimestre(t.get(1).getid(), t1d, t1f);
+        ecole.modifierTrimestre(t.get(2).getid(), t2d, t2f);
+        ecole.modifierTrimestre(t.get(3).getid(), t3d, t3f);
     }  
     
     
@@ -226,5 +243,12 @@ public class ModifierTrimestre extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton valider;
+    private String t1d;
+    private String t2d;
+    private String t3d;
+    private String t1f;
+    private String t2f;
+    private String t3f;
+    
     // End of variables declaration                   
 }
