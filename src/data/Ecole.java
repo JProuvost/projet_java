@@ -871,4 +871,12 @@ public class Ecole{
                         }
     }
     
+    public ArrayList<AnneeScolaire> getannee(){
+        return annee;
+    }
+    
+    public Classe getClasse(int id){
+        return classe.get(id);
+    }
+    
 }
