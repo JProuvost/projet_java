@@ -37,7 +37,7 @@ public class ClasseMoyenne extends IknowEcole{
             e.getmine(a, new ArrayList<Trimestre>(), classeA);
             e.getmine(b, classeB);
             
-            classe = e.cross(classeA, classeB);
+            classe = e.crossclasse(classeA, classeB);
             
         }catch(NotFoundException e){
             System.out.println("l'Annee ou les classes n'existe.s pas");            
