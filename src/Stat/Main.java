@@ -9,6 +9,7 @@ import data.*;
 import java.util.HashMap;
 import java.util.Map;
 import Chart.*;
+import java.util.ArrayList;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.ui.RefineryUtilities;
 
@@ -30,21 +31,22 @@ public class Main {
         e.addAnnee();
 
         e.addNiveau("5e");
+        e.addNiveau("4e");
 
         e.addClasse("5e1", 1, 1);
         e.addClasse("5e2", 1, 1);
-        e.addClasse("5e3", 1, 1);
-        e.addClasse("5e4", 1, 1);
+        e.addClasse("4e1", 2, 1);
+        e.addClasse("4e2", 2, 1);
         
         e.addClasse("5e1", 1, 2);
         e.addClasse("5e2", 1, 2);
-        e.addClasse("5e3", 1, 2);
-        e.addClasse("5e4", 1, 2);
+        e.addClasse("4e1", 2, 2);
+        e.addClasse("4e2", 2, 2);
         
         e.addClasse("5e1", 1, 3);
         e.addClasse("5e2", 1, 3);
-        e.addClasse("5e3", 1, 3);
-        e.addClasse("5e4", 1, 3);
+        e.addClasse("4e1", 2, 3);
+        e.addClasse("4e2", 2, 3);
 
         e.addDiscipline("math");
         e.addDiscipline("phisique");
@@ -57,12 +59,22 @@ public class Main {
 
         e.addEnseignement(1, 1, 1);
         e.addEnseignement(2, 1, 1);
-        e.addEnseignement(1, 2, 1);
-        e.addEnseignement(2, 2, 1);
-        e.addEnseignement(1, 3, 1);
-        e.addEnseignement(2, 3, 1);
-        e.addEnseignement(1, 4, 1);
-        e.addEnseignement(2, 4, 1);
+        e.addEnseignement(1, 2, 2);
+        e.addEnseignement(2, 2, 2);
+        e.addEnseignement(1, 3, 3);
+        e.addEnseignement(2, 3, 3);
+        e.addEnseignement(1, 4, 3);
+        e.addEnseignement(2, 4, 4);
+        
+        e.addEnseignement(1, 5, 1);
+        e.addEnseignement(2, 5, 1);
+        e.addEnseignement(1, 6, 2);
+        e.addEnseignement(2, 6, 2);
+        e.addEnseignement(1, 7, 3);
+        e.addEnseignement(2, 8, 3);
+        e.addEnseignement(1, 8, 3);
+        e.addEnseignement(2, 8, 4);
+        
 
         e.addPersonne("delablasse", "calus", "eleve");
         e.addPersonne("leba", "jerem", "eleve");
@@ -86,6 +98,7 @@ public class Main {
         e.addInscription(6, 5);
         e.addInscription(6, 6);
         e.addInscription(7, 7);
+        e.addInscription(7, 8);
         
         e.addInscription(9, 1);
         e.addInscription(9, 2);
@@ -104,6 +117,7 @@ public class Main {
         e.addEvaluation(2, 9, "");
         e.addEvaluation(2, 2, "");
         e.addEvaluation(3, 12, "");
+        e.addEvaluation(5, 16, "");
         e.addEvaluation(4, 19, "");
         e.addEvaluation(6, 20, "");
         e.addEvaluation(6, 15, "");
@@ -164,11 +178,39 @@ public class Main {
         e.addEvaluation(53, 15, "");
         e.addEvaluation(54, 7, "");
         e.addEvaluation(55, 19, "");
-        e.addEvaluation(53, 15, "");
+        e.addEvaluation(19, 19, "");
+        e.addEvaluation(20, 5, "");
+        e.addEvaluation(21, 8, "");
+        e.addEvaluation(22, 12, "");
+        e.addEvaluation(23, 15, "");
+        e.addEvaluation(24, 10, "");
+        e.addEvaluation(25, 6, "");
+        e.addEvaluation(26, 9, "");
+        e.addEvaluation(56, 17, "");
+        e.addEvaluation(57, 8, "");
+        e.addEvaluation(58, 12, "");
+        e.addEvaluation(59, 15, "");
+        e.addEvaluation(60, 10, "");
+        e.addEvaluation(61, 6, "");
+        e.addEvaluation(62, 9, "");
+        e.addEvaluation(63, 17, "");
+        e.addEvaluation(64, 8, "");
+        e.addEvaluation(65, 12, "");
+        e.addEvaluation(66, 15, "");
+        e.addEvaluation(67, 10, "");
+        e.addEvaluation(68, 6, "");
+        e.addEvaluation(69, 9, "");
+        e.addEvaluation(70, 17, "");
         
                 
         evEleve eve = new evEleve(e);
         eve.fedetruc();
+        
+        Profratio pr = new Profratio(e,2);
+        pr.fedetruc();
+        
+        ClasseMoyenne cm = new ClasseMoyenne(e,2,2);
+        cm.fedetruc();
         
     }
       

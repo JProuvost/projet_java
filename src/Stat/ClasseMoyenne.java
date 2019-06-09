@@ -23,15 +23,21 @@ public class ClasseMoyenne extends IknowEcole{
         super();
     }
     
-    public ClasseMoyenne(Ecole ecole, int idannee){
+    public ClasseMoyenne(Ecole ecole, int idannee, int idniveau){
         super(ecole);
         annee = idannee;
         
+        ArrayList<Classe> classeA = new ArrayList<>();
+        ArrayList<Classe> classeB = new ArrayList<>();
         ArrayList<Classe> classe = new ArrayList<>();
         
         try{
             AnneeScolaire a = e.seekerAnnee(idannee);
-            e.getmine(a, new ArrayList<Trimestre>(), classe);
+            Niveau b = e.seekerNiveau(idniveau);
+            e.getmine(a, new ArrayList<Trimestre>(), classeA);
+            e.getmine(b, classeB);
+            
+            classe = e.cross(classeA, classeB);
             
         }catch(NotFoundException e){
             System.out.println("l'Annee ou les classes n'existe.s pas");            
