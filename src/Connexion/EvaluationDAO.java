@@ -20,7 +20,7 @@ public class EvaluationDAO extends DAO<Evaluation>{
     public boolean create(Evaluation as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO evaluation (idevaluation, note, appreciation, iddetail) VALUES ("+as.get_id()+", "+as.get_note()+", '"+as.get_appreciation()+"', "+as.get_iddetail()+")");
+            connexion.executeUpdate("INSERT INTO evaluation (idevaluation, note, appreciation, iddetail) VALUES ("+as.getid()+", "+as.getnote()+", '"+as.getappreciation()+"', "+as.getidDetailBulletin()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class EvaluationDAO extends DAO<Evaluation>{
     @Override
     public boolean delete(Evaluation as)
     {
-        try{connexion.executeUpdate("DELETE FROM evaluation WHERE idevaluation="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM evaluation WHERE idevaluation="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class EvaluationDAO extends DAO<Evaluation>{
     public boolean update(Evaluation as)
     {
         try{
-            connexion.executeUpdate("UPDATE evaluation SET note="+as.get_note()+", appreciation='"+as.get_appreciation()+"', iddetail="+as.get_iddetail()+" WHERE idevaluation="+as.get_id());
+            connexion.executeUpdate("UPDATE evaluation SET note="+as.getnote()+", appreciation='"+as.getappreciation()+"', iddetail="+as.getidDetailBulletin()+" WHERE idevaluation="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class EvaluationDAO extends DAO<Evaluation>{
         return false;
     }
     @Override
+    public ArrayList<Evaluation> tout()
+    {
+        ArrayList<Evaluation> a = new ArrayList<>();
+        a.add(new Evaluation());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM detailbulletin");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Evaluation(Integer.parseInt(result[0]),Integer.parseInt(result[1]),Float.parseFloat(result[2]),result[3]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Evaluation find(int id)
     {
         Evaluation a = new Evaluation();
@@ -61,5 +78,5 @@ public class EvaluationDAO extends DAO<Evaluation>{
             System.out.println("L'évaluation cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

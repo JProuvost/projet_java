@@ -31,7 +31,7 @@ public class Ecole{
     
     public Ecole(){
         annee = new ArrayList<>();
-        annee.add(new AnneeScolaire());
+        annee.add(new AnneeScolaire(2017));
         trimestre = new ArrayList<>();
         trimestre.add(new Trimestre());
         niveau = new ArrayList<>();
@@ -52,6 +52,7 @@ public class Ecole{
         detail.add(new DetailBulletin());
         evaluation = new ArrayList<>();
         evaluation.add(new Evaluation());
+        init();
     }
     /**
      * initialise toutes les arraylist
@@ -72,14 +73,15 @@ public class Ecole{
             DAO<Personne> personneDAO= new PersonneDAO(connexion);
             
             annee = anneescolaireDAO.tout();
-            trimestre = trimestreDAO.tout();
-            niveau = niveauDAO.tout();
-            classe = classeDAO.tout();
-            discipline = disciplineDAO.tout();
-            personne = personneDAO.tout();
-            enseignement = enseignementDAO.tout();
-            inscription = inscriptionDAO.tout();
+            trimestre = trimestreDAO.tout();            
+            niveau = niveauDAO.tout();            
+            classe = classeDAO.tout();            
+            discipline = disciplineDAO.tout();          
+            personne = personneDAO.tout();           
+            enseignement = enseignementDAO.tout();           
+            inscription = inscriptionDAO.tout();            
             bulletin= bulletinDAO.tout();
+            
             detail = detailbulletinDAO.tout();
             evaluation = evaluationDAO.tout();
             
@@ -530,62 +532,135 @@ public class Ecole{
     
     //ajout
     public void addAnnee(){
-        int id = annee.size();
-        annee.add(new AnneeScolaire(id));
+        int c = annee.size()-1;
+        int id = annee.get(c).getid()+1;
+        AnneeScolaire a= new AnneeScolaire(id);
+        annee.add(a);
         addTrimestre(1, "7 septembre", "20 decembre", id);
         addTrimestre(2, "6 janvier", "21 mars", id);
         addTrimestre(3, "7 avril", "25 juin", id);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<AnneeScolaire> asDAO = new AnneeScolaireDAO(connexion);
+            asDAO.create(a);
+        }catch(Exception e){
+            System.out.println("Erreur de connexion à la BDD.");
+        }
     }
     
     public void addBulletin(int idIns, int idTri, String appre){
         
         int id=bulletin.size();
-        bulletin.add(new Bulletin(id, idIns, idTri, appre));
+        Bulletin a = new Bulletin(id, idIns, idTri, appre);
+        bulletin.add(a);
         ArrayList<Enseignement> ens = new ArrayList<>();
+        
+        if(appre == ""){appre = "-";}
         
         try{
             Inscription ins = seekerInscription(idIns);
             HashMap<String,idClasse> insis = whoamI(ins);
             Classe c = (Classe)insis.get("Classe");
             getmine(c,ens, new ArrayList<>());
+            try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Bulletin> asDAO = new BulletinDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
         }catch(NotFoundException e){
             System.out.println("l'Inscritpion n'existe pas");
         }
         
         for(int i = 0; i<ens.size(); i++){
-            addDetail(id, ens.get(i).getid(),"");
+            addDetail(id, ens.get(i).getid()," ");
         }       
     }
     
     public void addClasse(String nom, int idNiveau, int idAnnee){
         int id = classe.size();
-        classe.add(new Classe(id, nom, idNiveau, idAnnee));
+        Classe a= new Classe(id, nom,idNiveau, idAnnee);
+        classe.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Classe> asDAO = new ClasseDAO(connexion);
+            asDAO.create(a);
+        }catch(Exception e){
+            System.out.println("Erreur de connexion à la BDD.");
+        }
     }
     
     public void addDetail(int idBull, int idEns, String appre){
         int id = detail.size();
-        detail.add(new DetailBulletin(id, idBull, idEns, appre));
+        DetailBulletin a= new DetailBulletin(id, idBull, idEns, appre);
+        detail.add(a);
+        
+        if(appre == ""){appre = "-";}
+        
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<DetailBulletin> asDAO = new DetailBulletinDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
     public void addDiscipline(String nom){
         int id = discipline.size();
-        discipline.add(new Discipline(id, nom));
+        Discipline a = new Discipline(id, nom);
+        discipline.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Discipline> asDAO = new DisciplineDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
     public void addEnseignement(int idDisci, int idCla, int idPerso){
         int id = enseignement.size();
-        enseignement.add(new Enseignement(id, idDisci, idCla, idPerso));
+        Enseignement a = new Enseignement(id, idDisci, idCla,idPerso);
+        enseignement.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Enseignement> asDAO = new EnseignementDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
     public void addEvaluation(int idDeta, double note, String appre){
         int id = evaluation.size();
-        evaluation.add(new Evaluation(id, idDeta, note, appre));
+        Evaluation a= new Evaluation(id,idDeta, note, appre);
+        evaluation.add(a);
+        
+        if(appre == ""){appre = "-";}
+        
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Evaluation> asDAO = new EvaluationDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
     public void addInscription(int idCla, int idPerso){
         
         int id = inscription.size();
-        inscription.add(new Inscription(id, idCla, idPerso));
+        Inscription a= new Inscription(id,idCla,idPerso);
+        inscription.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Inscription> asDAO = new InscriptionDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
         ArrayList<Trimestre> T = new ArrayList<>();
                 
         try{
@@ -598,23 +673,50 @@ public class Ecole{
         }
         
         for(int i=0; i<T.size(); i++){
-            addBulletin(id, T.get(i).getid(), "");
+            addBulletin(id, T.get(i).getid(), " ");
         }
     }
     
     public void addNiveau(String nom){
         int id = niveau.size();
-        niveau.add(new Niveau(id, nom));
+        Niveau a = new Niveau(id, nom);
+        niveau.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Niveau> asDAO = new NiveauDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
-    public void addPersonne(String nom, String prenom, String type){
+    
+    public Personne addPersonne(String nom, String prenom, String type){
         int id = personne.size();
-        personne.add(new Personne(id, nom, prenom, type));
+        Personne p = new Personne(id, nom, prenom, type);
+        personne.add(p);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Personne> asDAO = new PersonneDAO(connexion);
+            asDAO.create(p);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
+        return p;
     }
     
     public void addTrimestre(int numero, String debut, String fin, int idA){
         int id = trimestre.size();
-        trimestre.add(new Trimestre(id, numero, debut, fin, idA));
+        System.out.println(id);
+        Trimestre a = new Trimestre(id, numero,debut,fin,idA);
+        trimestre.add(a);
+        try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Trimestre> asDAO = new TrimestreDAO(connexion);
+            asDAO.create(a);
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
     }
     
     public void addnewIns(int idClasse,String nom, String prenom){
@@ -832,13 +934,24 @@ public class Ecole{
     //misc
     public void modifierTrimestre(int idT, String debut, String fin){
         try{
+            System.out.println(fin);
             seekerTrimestre(idT).changerdate(debut,fin);
+            try{
+            Connexion connexion = new Connexion("ecole","root","");
+            DAO<Trimestre> asDAO = new TrimestreDAO(connexion);
+            asDAO.update(seekerTrimestre(idT));
+            }catch(Exception e){
+                System.out.println("Erreur de connexion à la BDD.");
+            }
             }catch(NotFoundException e){
             System.out.print("Le Trimestre n'existe pas");
         }
     }
     
     public void modappre(int id, String type, String mod){
+        
+        if(mod == ""){mod = "-";}
+        
         switch (type) 
                         {
                             case "Bulletin":
@@ -870,7 +983,9 @@ public class Ecole{
                                 break;
                         }
     }
-    
+    public ArrayList<Discipline> getdiscipline(){
+        return discipline;
+    }
     public ArrayList<AnneeScolaire> getannee(){
         return annee;
     }
@@ -879,4 +994,63 @@ public class Ecole{
         return classe.get(id);
     }
     
+    public ArrayList<Niveau> getniveau(){return niveau;}
+    
+    public ArrayList<Personne> getEleves(){
+        ArrayList<Personne> toreturn = new ArrayList<>();
+        for(int i = 0; i<personne.size(); i++){
+            if("eleve".equals(personne.get(i).gettype())){
+                toreturn.add(personne.get(i));
+                System.out.println(toreturn.size());
+            }
+        }
+        return toreturn;
+    }
+    
+    public ArrayList<Personne> getProfs(){
+        ArrayList<Personne> toreturn = new ArrayList<>();
+        for(int i = 0; i<personne.size(); i++){
+            if("enseignant".equals(personne.get(i).gettype())){
+                toreturn.add(personne.get(i));
+                System.out.println(toreturn.size());
+            }
+        }
+        return toreturn;
+    }
+    
+    //croisement d'Array
+    public ArrayList<Classe> crossclasse(ArrayList<Classe> a,ArrayList<Classe> b){
+        ArrayList<Classe> toreturn = new ArrayList<>();
+        for(int i =0; i<a.size(); i++){
+            for(int j = 0; j<b.size(); j++){
+                if(a.get(i).getid() == b.get(j).getid()){
+                    toreturn.add(a.get(i));
+                }
+            }
+        }
+        return toreturn;
+    }
+    
+    public ArrayList<DetailBulletin> crossdetail(ArrayList<DetailBulletin> a,ArrayList<DetailBulletin> b){
+        ArrayList<DetailBulletin> toreturn = new ArrayList<>();
+        for(int i =0; i<a.size(); i++){
+            for(int j = 0; j<b.size(); j++){
+                if(a.get(i).getid() == b.get(j).getid()){
+                    toreturn.add(a.get(i));
+                }
+            }
+        }
+        return toreturn;
+    }
+    
+    public ArrayList<Personne> getpersonne(){
+        return personne;
+    }
+    
+    public ArrayList<Classe> getclasse(){
+        return classe;
+    }
+    public ArrayList<Bulletin> getbulletin(){
+        return bulletin;
+    }
 }

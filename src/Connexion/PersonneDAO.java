@@ -20,7 +20,7 @@ public class PersonneDAO extends DAO<Personne>{
     public boolean create(Personne as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO personne (idpersonne, nom, prenom, type) VALUES ("+as.get_id()+", '"+as.get_nom()+"', '"+as.get_prenom()+"', '"+as.get_type()+"')");
+            connexion.executeUpdate("INSERT INTO personne (idpersonne, nom, prenom, type) VALUES ("+as.getid()+", '"+as.getnom()+"', '"+as.getprenom()+"', '"+as.gettype()+"')");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class PersonneDAO extends DAO<Personne>{
     @Override
     public boolean delete(Personne as)
     {
-        try{connexion.executeUpdate("DELETE FROM personne WHERE idpersonne="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM personne WHERE idpersonne="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,14 +42,32 @@ public class PersonneDAO extends DAO<Personne>{
     public boolean update(Personne as)
     {
         try{
-            connexion.executeUpdate("UPDATE personne SET nom='"+as.get_nom()+"', prenom='"+as.get_prenom()+"', type='"+as.get_type()+"' WHERE idpersonne="+as.get_id());
+            connexion.executeUpdate("UPDATE personne SET nom='"+as.getnom()+"', prenom='"+as.getprenom()+"', type='"+as.gettype()+"' WHERE idpersonne="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
         return false;
     }
+    
     @Override
+    public ArrayList<Personne> tout()
+    {
+        ArrayList<Personne> a = new ArrayList<>();
+        a.add(new Personne());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM personne");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Personne(Integer.parseInt(result[0]),result[1],result[2],result[3]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Personne find(int id)
     {
         Personne a = new Personne();
@@ -61,5 +79,5 @@ public class PersonneDAO extends DAO<Personne>{
             System.out.println("La personne cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

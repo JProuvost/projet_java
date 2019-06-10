@@ -19,7 +19,7 @@ public class Evaluation extends idClasse {
         
     }
     
-    public Evaluation(int a, int b, double c, String d){
+    public  Evaluation(int a, int b, double c, String d){
         
         super(a);
         idDetailBulletin = b;

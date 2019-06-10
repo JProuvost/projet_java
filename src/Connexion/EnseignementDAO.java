@@ -20,7 +20,7 @@ public class EnseignementDAO extends DAO<Enseignement>{
     public boolean create(Enseignement as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO enseignement (idenseignement, iddiscipline, idclasse, idpersonne) VALUES ("+as.get_id()+", "+as.get_iddiscipline()+", "+as.get_idclasse()+", "+as.get_idpersonne()+")");
+            connexion.executeUpdate("INSERT INTO enseignement (idenseignement, iddiscipline, idclasse, idpersonne) VALUES ("+as.getid()+", "+as.getidDiscipline()+", "+as.getidClasse()+", "+as.getidPersonne()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class EnseignementDAO extends DAO<Enseignement>{
     @Override
     public boolean delete(Enseignement as)
     {
-        try{connexion.executeUpdate("DELETE FROM enseignement WHERE idenseignement="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM enseignement WHERE idenseignement="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class EnseignementDAO extends DAO<Enseignement>{
     public boolean update(Enseignement as)
     {
         try{
-            connexion.executeUpdate("UPDATE enseignement SET iddiscipline="+as.get_iddiscipline()+", idclasse="+as.get_idclasse()+", idpersonne="+as.get_idpersonne()+" WHERE idenseignement="+as.get_id());
+            connexion.executeUpdate("UPDATE enseignement SET iddiscipline="+as.getidDiscipline()+", idclasse="+as.getidClasse()+", idpersonne="+as.getidPersonne()+" WHERE idenseignement="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class EnseignementDAO extends DAO<Enseignement>{
         return false;
     }
     @Override
+    public ArrayList<Enseignement> tout()
+    {
+        ArrayList<Enseignement> a = new ArrayList<>();
+        a.add(new Enseignement());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM enseignement");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Enseignement(Integer.parseInt(result[0]),Integer.parseInt(result[1]),Integer.parseInt(result[2]),Integer.parseInt(result[3])));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Enseignement find(int id)
     {
         Enseignement a = new Enseignement();
@@ -61,5 +78,5 @@ public class EnseignementDAO extends DAO<Enseignement>{
             System.out.println("L'enseignement cherché n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

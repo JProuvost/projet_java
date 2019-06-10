@@ -20,7 +20,7 @@ public class BulletinDAO extends DAO<Bulletin>{
     public boolean create(Bulletin as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO bulletin (idbulletin, idinscription, appreciation, idtrimestre) VALUES ("+as.get_id()+", "+as.get_idinscription()+", '"+as.get_appreciation()+"', "+as.get_idtrimestre()+")");
+            connexion.executeUpdate("INSERT INTO bulletin (idbulletin, idinscription, appreciation, idtrimestre) VALUES ("+as.getid()+", "+as.getidInscription()+", '"+as.getappreciation()+"', "+as.getidTrimestre()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class BulletinDAO extends DAO<Bulletin>{
     @Override
     public boolean delete(Bulletin as)
     {
-        try{connexion.executeUpdate("DELETE FROM bulletin WHERE idbulletin="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM bulletin WHERE idbulletin="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class BulletinDAO extends DAO<Bulletin>{
     public boolean update(Bulletin as)
     {
         try{
-            connexion.executeUpdate("UPDATE bulletin SET idinscription="+as.get_idinscription()+", appreciation='"+as.get_appreciation()+"', idtrimestre="+as.get_idtrimestre()+" WHERE idbulletin="+as.get_id());
+            connexion.executeUpdate("UPDATE bulletin SET idinscription="+as.getidInscription()+", appreciation='"+as.getappreciation()+"', idtrimestre="+as.getidTrimestre()+" WHERE idbulletin="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,7 +50,24 @@ public class BulletinDAO extends DAO<Bulletin>{
         return false;
     }
     @Override
-    public Bulletin find(int id)
+    public ArrayList<Bulletin> tout()
+    {
+        ArrayList<Bulletin> a = new ArrayList<>();
+        a.add(new Bulletin());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM bulletin");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Bulletin(Integer.parseInt(result[0]),Integer.parseInt(result[1]),Integer.parseInt(result[2]),result[3]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
+     public Bulletin find(int id)
     {
         Bulletin a = new Bulletin();
         try{
@@ -61,5 +78,5 @@ public class BulletinDAO extends DAO<Bulletin>{
             System.out.println("Le bulletin cherché n'existe pas.");
         }
         return a;
-    }
+    } */
 }

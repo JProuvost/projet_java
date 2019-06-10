@@ -20,7 +20,7 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>{
     public boolean create(DetailBulletin as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO detailbulletin (iddetail, idbulletin, idenseignement, appreciation) VALUES ("+as.get_id()+", "+as.get_idbulletin()+", "+as.get_idenseignement()+", '"+as.get_appreciation()+"')");
+            connexion.executeUpdate("INSERT INTO detailbulletin (iddetail, idbulletin, idenseignement, appreciation) VALUES ("+as.getid()+", "+as.getidBulletin()+", "+as.getidEnseignement()+", '"+as.getappreciation()+"')");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>{
     @Override
     public boolean delete(DetailBulletin as)
     {
-        try{connexion.executeUpdate("DELETE FROM detailbulletin WHERE iddetail="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM detailbulletin WHERE iddetail="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>{
     public boolean update(DetailBulletin as)
     {
         try{
-            connexion.executeUpdate("UPDATE detailbulletin SET idbulletin="+as.get_idbulletin()+", idenseignement="+as.get_idenseignement()+", appreciation='"+as.get_appreciation()+"' WHERE iddetail="+as.get_id());
+            connexion.executeUpdate("UPDATE detailbulletin SET idbulletin="+as.getidBulletin()+", idenseignement="+as.getidEnseignement()+", appreciation='"+as.getappreciation()+"' WHERE iddetail="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>{
         return false;
     }
     @Override
+    public ArrayList<DetailBulletin> tout()
+    {
+        ArrayList<DetailBulletin> a = new ArrayList<>();
+        a.add(new DetailBulletin());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM detailbulletin");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new DetailBulletin(Integer.parseInt(result[0]),Integer.parseInt(result[1]),Integer.parseInt(result[2]),result[3]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public DetailBulletin find(int id)
     {
         DetailBulletin a = new DetailBulletin();
@@ -61,5 +78,5 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>{
             System.out.println("Le détail cherché n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

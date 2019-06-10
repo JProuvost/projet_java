@@ -20,7 +20,7 @@ public class DisciplineDAO extends DAO<Discipline>{
     public boolean create(Discipline as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO discipline (iddiscipline, nom) VALUES ("+as.get_id()+", '"+as.get_nom()+"')");
+            connexion.executeUpdate("INSERT INTO discipline (iddiscipline, nom) VALUES ("+as.getid()+", '"+as.getnom()+"')");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class DisciplineDAO extends DAO<Discipline>{
     @Override
     public boolean delete(Discipline as)
     {
-        try{connexion.executeUpdate("DELETE FROM discipline WHERE iddiscipline="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM discipline WHERE iddiscipline="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,14 +42,32 @@ public class DisciplineDAO extends DAO<Discipline>{
     public boolean update(Discipline as)
     {
         try{
-            connexion.executeUpdate("UPDATE discipline SET nom='"+as.get_nom()+"' WHERE iddiscipline="+as.get_id());
+            connexion.executeUpdate("UPDATE discipline SET nom='"+as.getnom()+"' WHERE iddiscipline="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
         return false;
     }
+    
     @Override
+    public ArrayList<Discipline> tout()
+    {
+        ArrayList<Discipline> a = new ArrayList<>();
+        a.add(new Discipline());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM discipline");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Discipline(Integer.parseInt(result[0]),result[1]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Discipline find(int id)
     {
         Discipline a = new Discipline();
@@ -61,5 +79,5 @@ public class DisciplineDAO extends DAO<Discipline>{
             System.out.println("La discipline cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

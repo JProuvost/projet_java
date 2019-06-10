@@ -8,7 +8,10 @@ import data.*;
 import java.util.ArrayList;
 import jdbcv2018.Connexion;
 import Connexion.*;
+import org.jfree.ui.RefineryUtilities;
+import visuelle.*;
 /**
+ * 
  *
  * @author Jean
  */
@@ -16,19 +19,14 @@ public class test {
     public static void main(String[] args)
     {
         ArrayList<String> resultat;
+        Fenetre all = new Fenetre();
+        RefineryUtilities.centerFrameOnScreen(all);
         try{
             Connexion connexion = new Connexion("ecole", "root","");
-            connexion.ajouterTable("anneescolaire");
-            try{connexion.executeUpdate("INSERT INTO anneescolaire VALUES()");}
-            catch(Exception e){System.out.println(e.getMessage());}
             resultat=connexion.remplirChampsRequete("SELECT * FROM bulletin");
-            for(String elem:resultat)
-            {
-                System.out.println(elem);
-            }
+            
             DAO<AnneeScolaire> anneescolaireDAO = new AnneeScolaireDAO(connexion);
-            AnneeScolaire a=anneescolaireDAO.find(2);
-            System.out.println(a.get_id());
+            
         }catch(Exception e){
             System.out.println("fuh");
         }

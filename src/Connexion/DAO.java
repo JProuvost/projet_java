@@ -5,6 +5,7 @@
  */
 package Connexion;
 
+import java.util.ArrayList;
 import jdbcv2018.Connexion;
 
 public abstract class DAO<T> {
@@ -36,9 +37,8 @@ public abstract class DAO<T> {
   public abstract boolean update(T obj);
 
   /**
-  * Méthode de recherche des informations
-  * @param id
-  * @return T
-  */
-  public abstract T find(int id);
+   * Méthode de création de tout
+   * @return ArrayList<T>
+   */
+  public abstract ArrayList<T> tout();
 }

@@ -13,11 +13,11 @@ class idClasse {
     
     int id;
     
-    public idClasse(){
+    idClasse(){
         
     }
     
-    public idClasse(int a){
+    idClasse(int a){
         id = a;
     }
     

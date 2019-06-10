@@ -17,7 +17,7 @@ public class Discipline extends idClasse{
         
     }
     
-    public Discipline(int a, String name)
+ public  Discipline(int a, String name)
     {
         super(a);
         nom = name;

@@ -20,7 +20,7 @@ public class InscriptionDAO extends DAO<Inscription>{
     public boolean create(Inscription as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO inscription (idinscription, ideleve, idclasse) VALUES ("+as.get_id()+", "+as.get_ideleve()+", "+as.get_idclasse()+")");
+            connexion.executeUpdate("INSERT INTO inscription (idinscription, ideleve, idclasse) VALUES ("+as.getid()+", "+as.getidPersonne()+", "+as.getidClasse()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class InscriptionDAO extends DAO<Inscription>{
     @Override
     public boolean delete(Inscription as)
     {
-        try{connexion.executeUpdate("DELETE FROM inscription WHERE idinscription="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM inscription WHERE idinscription="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class InscriptionDAO extends DAO<Inscription>{
     public boolean update(Inscription as)
     {
         try{
-            connexion.executeUpdate("UPDATE inscription SET ideleve="+as.get_ideleve()+", idclasse="+as.get_idclasse()+" WHERE idinscription="+as.get_id());
+            connexion.executeUpdate("UPDATE inscription SET ideleve="+as.getidPersonne()+", idclasse="+as.getidClasse()+" WHERE idinscription="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class InscriptionDAO extends DAO<Inscription>{
         return false;
     }
     @Override
+    public ArrayList<Inscription> tout()
+    {
+        ArrayList<Inscription> a = new ArrayList<>();
+        a.add(new Inscription());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM inscription");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Inscription(Integer.parseInt(result[0]),Integer.parseInt(result[1]),Integer.parseInt(result[2])));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Inscription find(int id)
     {
         Inscription a = new Inscription();
@@ -61,5 +78,5 @@ public class InscriptionDAO extends DAO<Inscription>{
             System.out.println("L'inscription cherché n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

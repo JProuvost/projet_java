@@ -20,7 +20,7 @@ public class ClasseDAO extends DAO<Classe>{
     public boolean create(Classe as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO classe (idclasse, nom, idniveau, idannee) VALUES ("+as.get_id()+", '"+as.get_nom()+"', "+as.get_idniveau()+", "+as.get_idannee()+")");
+            connexion.executeUpdate("INSERT INTO classe (idclasse, nom, idniveau, idannee) VALUES ("+as.getid()+", '"+as.getnom()+"', "+as.getidNiveau()+", "+as.getidAnnee()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class ClasseDAO extends DAO<Classe>{
     @Override
     public boolean delete(Classe as)
     {
-        try{connexion.executeUpdate("DELETE FROM classe WHERE idclasse="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM classe WHERE idclasse="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class ClasseDAO extends DAO<Classe>{
     public boolean update(Classe as)
     {
         try{
-            connexion.executeUpdate("UPDATE classe SET nom='"+as.get_nom()+"', idniveau="+as.get_idniveau()+", idannee="+as.get_idannee()+" WHERE idclasse="+as.get_id());
+            connexion.executeUpdate("UPDATE classe SET nom='"+as.getnom()+"', idniveau="+as.getidNiveau()+", idannee="+as.getidAnnee()+" WHERE idclasse="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class ClasseDAO extends DAO<Classe>{
         return false;
     }
     @Override
+    public ArrayList<Classe> tout()
+    {
+        ArrayList<Classe> a = new ArrayList<>();
+        a.add(new Classe());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM classe");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Classe(Integer.parseInt(result[0]),result[1],Integer.parseInt(result[2]),Integer.parseInt(result[3])));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Classe find(int id)
     {
         Classe a = new Classe();
@@ -61,5 +78,5 @@ public class ClasseDAO extends DAO<Classe>{
             System.out.println("La classe cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

@@ -20,7 +20,7 @@ public class TrimestreDAO extends DAO<Trimestre>{
     public boolean create(Trimestre as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO trimestre (idtrimestre, numero, debut, fin, idannee) VALUES ("+as.get_id()+", "+as.get_numero()+", '"+as.get_debut()+"', '"+as.get_fin()+"', "+as.get_idannee()+")");
+            connexion.executeUpdate("INSERT INTO trimestre (idtrimestre, numero, debut, fin, idannee) VALUES ("+as.getid()+", "+as.getnumero()+", '"+as.getdebut()+"', '"+as.getfin()+"', "+as.getidAnnee()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class TrimestreDAO extends DAO<Trimestre>{
     @Override
     public boolean delete(Trimestre as)
     {
-        try{connexion.executeUpdate("DELETE FROM trimestre WHERE idtrimestre="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM trimestre WHERE idtrimestre="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class TrimestreDAO extends DAO<Trimestre>{
     public boolean update(Trimestre as)
     {
         try{
-            connexion.executeUpdate("UPDATE trimestre SET numero="+as.get_numero()+", debut='"+as.get_debut()+", fin="+as.get_fin()+", idannee="+as.get_idannee()+" WHERE idtrimestre="+as.get_id());
+            connexion.executeUpdate("UPDATE trimestre SET numero="+as.getnumero()+", debut='"+as.getdebut()+"', fin='"+as.getfin()+"', idannee="+as.getidAnnee()+" WHERE idtrimestre="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,24 @@ public class TrimestreDAO extends DAO<Trimestre>{
         return false;
     }
     @Override
+    public ArrayList<Trimestre> tout()
+    {
+        ArrayList<Trimestre> a = new ArrayList<>();
+        a.add(new Trimestre());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM trimestre");
+            
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Trimestre(Integer.parseInt(result[0]),Integer.parseInt(result[1]),result[2],result[3],Integer.parseInt(result[4])));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Trimestre find(int id)
     {
         Trimestre a = new Trimestre();
@@ -61,5 +79,5 @@ public class TrimestreDAO extends DAO<Trimestre>{
             System.out.println("La trimestre cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

@@ -20,7 +20,7 @@ public class NiveauDAO extends DAO<Niveau>{
     public boolean create(Niveau as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO niveau (idniveau, nom) VALUES ("+as.get_id()+", '"+as.get_nom()+"')");
+            connexion.executeUpdate("INSERT INTO niveau (idniveau, nom) VALUES ("+as.getid()+", '"+as.getnom()+"')");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class NiveauDAO extends DAO<Niveau>{
     @Override
     public boolean delete(Niveau as)
     {
-        try{connexion.executeUpdate("DELETE FROM niveau WHERE idniveau="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM niveau WHERE idniveau="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -42,7 +42,7 @@ public class NiveauDAO extends DAO<Niveau>{
     public boolean update(Niveau as)
     {
         try{
-            connexion.executeUpdate("UPDATE niveau SET nom='"+as.get_nom()+"' WHERE idniveau="+as.get_id());
+            connexion.executeUpdate("UPDATE niveau SET nom='"+as.getnom()+"' WHERE idniveau="+as.getid());
             return true;
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -50,6 +50,23 @@ public class NiveauDAO extends DAO<Niveau>{
         return false;
     }
     @Override
+    public ArrayList<Niveau> tout()
+    {
+        ArrayList<Niveau> a = new ArrayList<>();
+        a.add(new Niveau());
+        try{
+            ArrayList<String>results=connexion.remplirChampsRequete("SELECT * FROM niveau");
+            for(String elem:results)
+            {
+                String[] result=elem.split(",");
+                a.add(new Niveau(Integer.parseInt(result[0]),result[1]));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public Niveau find(int id)
     {
         Niveau a = new Niveau();
@@ -61,5 +78,5 @@ public class NiveauDAO extends DAO<Niveau>{
             System.out.println("Le niveau cherché n'existe pas.");
         }
         return a;
-    }
+    }*/
 }

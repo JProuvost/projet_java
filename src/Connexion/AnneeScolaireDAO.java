@@ -20,7 +20,7 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire>{
     public boolean create(AnneeScolaire as)
     {
         try{
-            connexion.executeUpdate("INSERT INTO anneescolaire (idannee) VALUES ("+as.get_id()+")");
+            connexion.executeUpdate("INSERT INTO anneescolaire (idannee) VALUES ("+as.getid()+")");
             return true;
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -30,7 +30,7 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire>{
     @Override
     public boolean delete(AnneeScolaire as)
     {
-        try{connexion.executeUpdate("DELETE FROM anneescolaire WHERE idannee="+as.get_id());
+        try{connexion.executeUpdate("DELETE FROM anneescolaire WHERE idannee="+as.getid());
         return true;
         }catch(SQLException e)
         {
@@ -44,6 +44,25 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire>{
         return false;
     }
     @Override
+    public ArrayList<AnneeScolaire> tout()
+    {
+        ArrayList<AnneeScolaire> a = new ArrayList<>();
+        a.add(new AnneeScolaire());
+        try{
+            ArrayList<String> results=connexion.remplirChampsRequete("SELECT * FROM anneescolaire");
+            int number;
+                    
+            for(int i=0; i<results.size();i++)
+            {
+                number = Integer.parseInt(results.get(i));
+                a.add(new AnneeScolaire(number));
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return a;
+    }
+    /*@Override
     public AnneeScolaire find(int id)
     {
         AnneeScolaire a = new AnneeScolaire();
@@ -55,5 +74,5 @@ public class AnneeScolaireDAO extends DAO<AnneeScolaire>{
             System.out.println("L'annee cherchée n'existe pas.");
         }
         return a;
-    }
+    }*/
 }
